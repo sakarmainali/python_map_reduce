@@ -131,8 +131,7 @@ if __name__ == '__main__':
     # Measure the execution time
     start_time = time.time()  # Record start time
     
-    #mr_job = MRPartitionEffectivenessExperiment(args=['project_gutenberg_eBook_emma.txt'])  # Create an instance of the MapReduce job with modified implementation
-    mr_job = MRMostUsedWord(args=['project_gutenberg_eBook_emma.txt'])  # Create an instance of the MapReduce job with original implementation
+    mr_job = MRMostUsedWord()  #Get the input data as argument from commandline
     
     # Run the job and monitor the resources
     memory_usage_before, cpu_usage_before = monitor_resources()

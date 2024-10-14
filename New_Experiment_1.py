@@ -36,8 +36,7 @@ if __name__ == '__main__':
     # Measure the execution time
     start_time = time.time()  # Record start time
     
-    #mr_job = MRWordFrequencyCount(args=['demo_input.txt'])  # Create an instance of the MapReduce job with original tutorial
-    mr_job = MRWordFrequencyCount(args=['wikipedia-dump_chunk_1.txt'])  # Create an instance of the MapReduce job with modified tutorial
+    mr_job = MRWordFrequencyCount() #Get the input data as argument from commandline
 
     # Run the job and monitor the resources
     memory_usage_before, cpu_usage_before = monitor_resources()

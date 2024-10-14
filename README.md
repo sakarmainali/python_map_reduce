@@ -62,7 +62,7 @@ Necessary Software & Tools :
   E.g. python  New_Experiment_1.py
   ```
 
-* Further Instructions on running Experiments
+* Further Instructions on running experiments
 
   Run the script with input file as argument.
 E.g.:
