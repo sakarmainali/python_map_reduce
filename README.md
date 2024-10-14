@@ -3,7 +3,7 @@
 
 This project investigates how variations in input data, custom partitioning, and the use of combiners influence the efficiency of MapReduce-based data processing. The study is conducted using the Apache Hadoop implementation framework and the MapReduce algorithm, which is widely used for large-scale parallel processing due to its scalability and fault tolerance.
 
-The project includes three stages of experimentation: baseline implementations ( Tutorials : Word Count, Most Common Word, Top Employee Salaries), input data modifications, and performance optimizations through custom partitioners and combiners. Key metrics analyzed include execution time, CPU utilization, startup overhead, data shuffling overhead and sequential scanning speeds. 
+The project includes three stages: baseline implementations ( Tutorials : Word Count, Most Common Word, Top Employee Salaries), input data modifications, and performance optimizations through custom partitioners and combiners. Key metrics analyzed include execution time, CPU utilization, startup overhead, data shuffling overhead and sequential scanning speeds. 
 
 Results from this work demonstrate how data size, complexity, and processing strategies affect the performance of MapReduce tasks, offering insights into optimizing distributed processing workflows.
 
@@ -13,10 +13,11 @@ Datasets Used:
     - Filename: demo_input.txt
 2. [Ebook from Project Gutenberg](https://www.gutenberg.org/ebooks/158) : Ebook titled "emma" written by Jane Austen posted on project gutenberg website
     - Filename: project_gutenberg_ebook_emma.txt
-3. [Employee Salaries Dataset](https://github.com/zdata-inc/HadoopWithPython/blob/master/resources/salaries.csv): A dataset containing employee data including names and salaries. to compute employee top annual salaries and gross pay. The dataset used is the example salary information from the city of Baltimore for 2014.
+3. [Employee Salaries Dataset](https://github.com/zdata-inc/HadoopWithPython/blob/master/resources/salaries.csv): A dataset containing employee data including names and salaries where we aim to compute employee top annual salaries and gross pay. The dataset used is the example salary information from the city of Baltimore for 2014.
+    - Filename: salaries.csv
 
-4. [Wikipedia Dump](https://www.kaggle.com/datasets/toastedalmonds/wikipedia-dump-20200820) : Wikipedia text data for large input size test
-
+4. [Wikipedia Dump](https://www.kaggle.com/datasets/toastedalmonds/wikipedia-dump-20200820) : Wikipedia text data for large input size test. The whole dataset is spilt into chunks for test runs.
+    - Filename: wikipedia-dump_chunk_1_mini.txt
 
 Necessary Software & Tools :
 
@@ -33,6 +34,9 @@ Necessary Software & Tools :
   ```
    OR
   you can download the zip file and extract in local machine
+
+
+  In the directory where you placed the project repo,
 
 * Install all required packages:
   ```shell
@@ -55,16 +59,21 @@ Necessary Software & Tools :
   ```
 * Running the Experiments:
 
-  Just run the script 
+  For Experiment 1 and Experiment 2
+
+  ```shell
+  python [script_name] [input_file_name]
+
+  E.g. python  New_Experiment_1.py wikipedia-dump_chunk_1_mini.txt
+  ```
+  For Experiment 3
+
+  Just run the script
+
   ```shell
   python [script_name]
 
-  E.g. python  New_Experiment_1.py
+  E.g. python  New_Experiment_3.py
   ```
-
-* Further Instructions on running experiments
-
-  Run the script with input file as argument.
-E.g.:
 
 
