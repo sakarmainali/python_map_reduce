@@ -18,7 +18,7 @@ import psutil  # For measuring system resources
 # Compile a regular expression pattern to match words
 WORD_RE = re.compile(r"[\w']+")
 
-
+#Original Implementation Class
 class MRMostUsedWord(MRJob):  # Define a new class that inherits from MRJob
 
     def steps(self):  # Define the steps for the job
@@ -48,7 +48,7 @@ class MRMostUsedWord(MRJob):  # Define a new class that inherits from MRJob
         # so yielding one results in key=counts, value=word
         yield max(word_count_pairs)
 
-
+#Modified Implementation Class
 class MRPartitionEffectivenessExperiment(MRJob):  # Define a new class that inherits from MRJob
 
     def configure_args(self):
@@ -116,10 +116,6 @@ class MRPartitionEffectivenessExperiment(MRJob):  # Define a new class that inhe
         return word_length % num_reducers
     
 
-
-
-
-
 def monitor_resources():
     memory_info = psutil.virtual_memory()
     memory_usage = memory_info.used / (1024 ** 2)  # Convert to MB
@@ -131,8 +127,8 @@ if __name__ == '__main__':
     # Measure the execution time
     start_time = time.time()  # Record start time
     
-    mr_job = MRPartitionEffectivenessExperiment()  #Get the input data as argument from commandline
-    #mr_job = MRMostUsedWord()                      # For original implementation
+    mr_job = MRPartitionEffectivenessExperiment()  # Create an instance of the MapReduce job with modified implementation and get the input data as argument from commandline
+    #mr_job = MRMostUsedWord()                     # Create an instance of the MapReduce job with original implementation and get the input data as argument from commandline
     
     # Run the job and monitor the resources
     memory_usage_before, cpu_usage_before = monitor_resources()
