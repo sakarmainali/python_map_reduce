@@ -54,8 +54,7 @@ class MRMostUsedWordWithCustomPartitioner(MRJob):  # Define a new class that inh
 
     def get_partition(self, word):
         """
-        Custom partitioning logic based on word length.
-        This will ensure words of similar lengths are grouped together.
+        Custom partitioning logic based on word length.This will ensure words of similar lengths are grouped together.
 
         :param word: The word to partition.
         

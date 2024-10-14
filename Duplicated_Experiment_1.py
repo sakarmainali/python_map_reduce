@@ -24,7 +24,7 @@ class MRWordCount(MRJob):
 if __name__ == '__main__':
     # Measure startup overhead
     start_time = time.time()
-    mr_job = MRWordCount(args=['input_1.txt'])
+    mr_job = MRWordCount(args=['demo_input.txt'])
     
     with mr_job.make_runner() as runner:
         runner.run()
