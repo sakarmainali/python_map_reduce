@@ -150,11 +150,11 @@ if __name__ == '__main__':
     # Run the job
     with mr_job.make_runner() as runner:
         runner.run()
-        '''
+        
         # Collect and print the output inside the runner block
-        for key, value in job.parse_output(runner.cat_output()):
+        for key, value in mr_job.parse_output(runner.cat_output()):
             print(f'{key}: {value}')
-        '''
+        
     end_time = time.time()
     execution_time = end_time - start_time
 
