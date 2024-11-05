@@ -28,7 +28,11 @@ class MRSequentialScan_txt(MRJob):
 
 if __name__ == '__main__':
     start_time = time.time()
-    mr_job = MRSequentialScan_txt(args=['demo_input.txt'])
+    #Input file
+    input_file = 'Tutorial_1_2_Input_1.txt'
+
+    #Sequential Scan job
+    mr_job = MRSequentialScan_txt(args=[input_file])
     
     with mr_job.make_runner() as runner:
         runner.run()

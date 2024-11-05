@@ -25,7 +25,7 @@ class MRWordCount(MRJob):
 if __name__ == '__main__':
 
     #input file Tutorial_1_2_Input_1.txt
-    input_file = 'Tutorial_1_2_Input_3.txt'
+    input_file = 'Tutorial_1_2_Input_4.txt'
 
     # Measure startup overhead
     start_time = time.time()

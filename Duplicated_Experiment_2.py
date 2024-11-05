@@ -34,7 +34,10 @@ def measure_memory():
     return process.memory_info().rss / (1024 * 1024)  # Return memory usage in MB
 
 if __name__ == '__main__':
-    input_file = 'wikipedia-dump_chunk_1.txt'  # Specify your input text file here
+
+    #Input file
+    input_file = 'Tutorial_1_2_Input_4.txt'
+
 
     # Measure performance with combiner
     print("Running job with combiner...")
@@ -44,15 +47,14 @@ if __name__ == '__main__':
     # Measure network I/O before shuffle starts
     net_io_before = psutil.net_io_counters()
 
-    #Run the mrjob
+    #Run the mrjob with combiner
     mr_job_with_combiner = MRWordCountWithCombiner(args=[input_file])
-    #mr_job_with_combiner = MRWordCountWithCombiner(args=[input_file])
-
+    
+    
     with mr_job_with_combiner.make_runner() as runner:
         runner.run()
 
     
-
     end_memory_with_combiner = measure_memory()
     end_time_with_combiner = time.time()
     # Measure network I/O after shuffle ends
@@ -61,12 +63,13 @@ if __name__ == '__main__':
     total_time_with_combiner = end_time_with_combiner - start_time_with_combiner
     total_memory_with_combiner = end_memory_with_combiner - start_memory_with_combiner
     data_shuffled = (net_io_after.bytes_sent - net_io_before.bytes_sent) + (net_io_after.bytes_recv - net_io_before.bytes_recv)
-    data_shuffled_mb = data_shuffled / (1024 * 1024)
+    data_shuffled_kb = data_shuffled / (1024)
     
 
     print(f"Total job execution time with combiner: {total_time_with_combiner} seconds")
     print(f"Memory usage with combiner: {total_memory_with_combiner} MB\n")
-    print(f"Data Shuffling Overhead: {data_shuffled_mb} MB")
+    print(f"Data Shuffling Overhead: {data_shuffled_kb} KB")
+
 
     # Measure performance without combiner
     print("Running job without combiner...")
@@ -85,12 +88,12 @@ if __name__ == '__main__':
     total_time_without_combiner = end_time_without_combiner - start_time_without_combiner
     total_memory_without_combiner = end_memory_without_combiner - start_memory_without_combiner
     data_shuffled = (net_io_after.bytes_sent - net_io_before.bytes_sent) + (net_io_after.bytes_recv - net_io_before.bytes_recv)
-    data_shuffled_mb = data_shuffled / (1024 * 1024)
+    data_shuffled_kb = data_shuffled / (1024)
 
 
     print(f"Total job execution time without combiner: {total_time_without_combiner} seconds")
     print(f"Memory usage without combiner: {total_memory_without_combiner} MB\n")
-    print(f"Data Shuffling Overhead: {data_shuffled_mb} MB")
+    print(f"Data Shuffling Overhead: {data_shuffled_kb} KB")
     # Summarize the results
     print("===== Performance Comparison =====")
     print(f"Time with combiner: {total_time_with_combiner} seconds")
