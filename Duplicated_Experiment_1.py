@@ -21,10 +21,18 @@ class MRWordCount(MRJob):
     def reducer(self, key, values):
         yield key, sum(values)
 
+
 if __name__ == '__main__':
+
+    #input file Tutorial_1_2_Input_1.txt
+    input_file = 'Tutorial_1_2_Input_3.txt'
+
     # Measure startup overhead
     start_time = time.time()
-    mr_job = MRWordCount(args=['demo_input.txt'])
+
+    #Define the job
+    mr_job = MRWordCount(args=[input_file])
+ 
     
     with mr_job.make_runner() as runner:
         runner.run()
@@ -32,3 +40,4 @@ if __name__ == '__main__':
     end_time = time.time()
     startup_overhead = end_time - start_time
     print(f"Startup overhead: {startup_overhead} seconds")
+    

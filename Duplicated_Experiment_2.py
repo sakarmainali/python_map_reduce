@@ -2,7 +2,7 @@
 Duplicated Experiment 2: Data Shuffling Overhead :
 Here we will measure time and resources spent shuffling data between maps and reduce tasks, particularly with the new combiner function.  
 
-Input: Varied input text files
+Input: Varied input text files with combiner and without combiner
 Output : Data Shuffling Overhead of map reduce job
 
 '''
@@ -44,8 +44,10 @@ if __name__ == '__main__':
     # Measure network I/O before shuffle starts
     net_io_before = psutil.net_io_counters()
 
-
+    #Run the mrjob
     mr_job_with_combiner = MRWordCountWithCombiner(args=[input_file])
+    #mr_job_with_combiner = MRWordCountWithCombiner(args=[input_file])
+
     with mr_job_with_combiner.make_runner() as runner:
         runner.run()
 
