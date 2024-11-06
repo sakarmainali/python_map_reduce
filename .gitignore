@@ -1,4 +1,4 @@
 temp/
 ./vscode
 .venv/
-.mrjob.conf
+.mrjob.conf/
