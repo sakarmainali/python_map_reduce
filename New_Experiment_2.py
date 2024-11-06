@@ -13,7 +13,9 @@ import re  # Import the regular expression module
 import time
 import timeit  # For measuring execution time
 import psutil  # For measuring system resources
-
+import datetime
+import os
+import sys
 
 # Compile a regular expression pattern to match words
 WORD_RE = re.compile(r"[\w']+")
@@ -116,34 +118,50 @@ class MRPartitionEffectivenessExperiment(MRJob):  # Define a new class that inhe
         return word_length % num_reducers
     
 
+# Function to monitor system resources
 def monitor_resources():
     memory_info = psutil.virtual_memory()
     memory_usage = memory_info.used / (1024 ** 2)  # Convert to MB
     cpu_usage = psutil.cpu_percent(interval=1)  # CPU usage in percentage
     return memory_usage, cpu_usage
 
+
+#function to save result
+def save_result(execution_time, memory_usage_before, memory_usage_after, cpu_usage_before, cpu_usage_after, cpu_usage, data_shuffled_kb,input_filename):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    input_name = os.path.splitext(os.path.basename(input_filename))[0]
+    filename = os.path.join("results", "New Experiment", "2", f"Experiment_2_results_{input_name}_{timestamp}.txt")
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+
+    with open(filename, "w") as f:
+        f.write("Execution time: {:.4f} seconds\n".format(execution_time))
+        f.write("Memory usage before job: {:.2f} MB\n".format(memory_usage_before))
+        f.write("Memory usage after job: {:.2f} MB\n".format(memory_usage_after))
+        f.write("CPU usage before job: {}%\n".format(cpu_usage_before))
+        f.write("CPU usage after job: {}%\n".format(cpu_usage_after))
+        f.write("Average CPU Utilization: {}%\n".format(cpu_usage))
+        f.write("Data Shuffling Overhead: {:.2f} KB\n".format(data_shuffled_kb))
+
+
 if __name__ == '__main__': 
 
     # Measure the execution time
     start_time = time.time()  # Record start time
-    
-    mr_job = MRPartitionEffectivenessExperiment()  # Create an instance of the MapReduce job with modified implementation and get the input data as argument from commandline
-    #mr_job = MRMostUsedWord()                     # Create an instance of the MapReduce job with original implementation and get the input data as argument from commandline
-    
-    # Run the job and monitor the resources
-    memory_usage_before, cpu_usage_before = monitor_resources()
 
     # Measure network I/O before shuffle starts
     net_io_before = psutil.net_io_counters()
+
+    # Monitor the resources
+    memory_usage_before, cpu_usage_before = monitor_resources()
     
+    # Get the input filename from command-line arguments for logs
+    input_filename = sys.argv[-1]
+
     # Run the job
-    with mr_job.make_runner() as runner:
-        runner.run()
-        '''
-        # Collect and print the output inside the runner block
-        for key, value in job.parse_output(runner.cat_output()):
-            print(f'{key}: {value}')
-        '''
+    MRPartitionEffectivenessExperiment().run()  # Create an instance of the MapReduce job with modified implementation and get the input data as argument from commandline
+    #MRMostUsedWord().run()                    # Create an instance of the MapReduce job with original implementation and get the input data as argument from commandline
+    
+    #Calculate Time
     end_time = time.time()
     execution_time = end_time - start_time
 
@@ -156,12 +174,7 @@ if __name__ == '__main__':
     cpu_usage = (cpu_usage_before + cpu_usage_after) / 2
     
     data_shuffled = (net_io_after.bytes_sent - net_io_before.bytes_sent) + (net_io_after.bytes_recv - net_io_before.bytes_recv)
-    data_shuffled_mb = data_shuffled / (1024 * 1024)
-    # Print the performance metrics
-    print(f"Execution time: {execution_time:.4f} seconds")
-    print(f"Memory usage before job: {memory_usage_before:.2f} MB")
-    print(f"Memory usage after job: {memory_usage_after:.2f} MB")
-    print(f"CPU usage before job: {cpu_usage_before}%")
-    print(f"CPU usage after job: {cpu_usage_after}%")
-    print(f"CPU Utilization: {cpu_usage}%")
-    print(f"Data Shuffling Overhead: {data_shuffled_mb} MB")
+    data_shuffled_kb = data_shuffled / (1024)
+
+    # Save the performance metrics results
+    save_result(execution_time, memory_usage_before, memory_usage_after, cpu_usage_before, cpu_usage_after, cpu_usage, data_shuffled_kb, input_filename)
