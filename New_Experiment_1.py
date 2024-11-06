@@ -1,3 +1,11 @@
+'''
+New Experiment 1: Input Data Complexity on Performance
+This experiment will evaluate how increasing the complexity and size of input data affects execution time and resource consumption. 
+Input: Varied input text files in size and complexity
+Output : Measurement of map reduce job time and memory usage
+'''
+
+
 from mrjob.job import MRJob
 import time
 import psutil
