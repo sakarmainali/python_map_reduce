@@ -2,3 +2,4 @@ temp/
 ./vscode
 .venv/
 .mrjob.conf/
+results/
