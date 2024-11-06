@@ -25,13 +25,6 @@ class MRWordFrequencyCount(MRJob):  # Define a new class that inherits from MRJo
         yield key, sum(values)
 
 if __name__ == '__main__':
+
     # Create an instance of the MRWordFrequencyCount job
-    job = MRWordFrequencyCount(args=['internet_archive_scifi_v3.txt'])  # Pass the input file name here
-
-    # Run the job
-    with job.make_runner() as runner:
-        runner.run()
-
-        # Collect and print the output inside the runner block
-        for key, value in job.parse_output(runner.cat_output()):
-            print(f'{key}: {value}')
+    MRWordFrequencyCount().run()

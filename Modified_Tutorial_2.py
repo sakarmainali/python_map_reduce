@@ -69,20 +69,10 @@ class MRMostUsedWordWithCustomPartitioner(MRJob):  # Define a new class that inh
 
 
 
-if __name__ == '__main__': 
-    job = MRMostUsedWordWithCustomPartitioner(args=['project_gutenberg_eBook_emma.txt'])  # Run the MRMostUsedWordWithCustomPartitioner job
-    start_time_with_combiner = time.time()
-    # Run the job
-    with job.make_runner() as runner:
-        runner.run()
-        
-        # Collect and print the output inside the runner block
-        for key, value in job.parse_output(runner.cat_output()):
-            print(f'{key}: {value}')
+if __name__ == '__main__':
+    # Run the MRMostUsedWordWithCustomPartitioner job
+    MRMostUsedWordWithCustomPartitioner().run()
+    
 
-
-    end_time_with_combiner = time.time()
-    total_time_with_combiner = end_time_with_combiner - start_time_with_combiner
-    print(f"Total job execution time with partitioner: {total_time_with_combiner} seconds")
 
 

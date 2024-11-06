@@ -73,12 +73,6 @@ class TopSalariesWithCombiner(MRJob):
             yield key, total_payroll
 
 if __name__ == '__main__':
+    # Run the MRMostUsedWordWithCustomPartitioner job
+    TopSalariesWithCombiner().run()
 
-    job = TopSalariesWithCombiner(args=['salaries.csv'])  # Run the MRMostUsedWordWithCustomPartitioner job
-    # Run the job
-    with job.make_runner() as runner:
-        runner.run()
-
-        # Collect and print the output inside the runner block
-        for key, value in job.parse_output(runner.cat_output()):
-            print(f'{key}: {value}')
