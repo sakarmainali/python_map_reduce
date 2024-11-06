@@ -1,3 +1,0 @@
-Total job execution time: 4.1095 seconds
-Memory usage: 5.6680 seconds
-Data Shuffling Overhead: 14.7119 seconds

@@ -1,4 +1,0 @@
-mrjob==0.7.4
-psutil==6.0.0
-PyYAML==6.0.2
-setuptools==75.1.0
