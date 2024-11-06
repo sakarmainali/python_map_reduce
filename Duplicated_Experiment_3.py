@@ -8,6 +8,9 @@ Output : Sequential Scanning speed of each text files
 import csv
 import time
 from mrjob.job import MRJob
+import datetime
+import os
+import sys
 
 class MRSequentialScan_csv(MRJob):
     def mapper(self, _, line):
@@ -26,17 +29,31 @@ class MRSequentialScan_txt(MRJob):
     def reducer(self, key, values):
         yield key, sum(values)
 
-if __name__ == '__main__':
-    start_time = time.time()
-    #Input file
-    input_file = 'Tutorial_1_2_Input_1.txt'
+#function to save result
+def save_result(total_time, input_filename):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    input_name = os.path.splitext(os.path.basename(input_filename))[0]
+    filename = os.path.join("results", "Duplicated Experiment", "3", f"Experiment_2_results_{input_name}_{timestamp}.txt")
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
 
-    #Sequential Scan job
-    mr_job = MRSequentialScan_txt(args=[input_file])
+    with open(filename, "w") as f:
+        f.write("Sequential scanning time : {:.4f} seconds\n".format(total_time))
+
+if __name__ == '__main__':
+
+    #Measure start time
+    start_time = time.time()
+
+    # Get the input filename from command-line arguments for logs
+    input_filename = sys.argv[-1]
+
+    #Run Sequential Scan job
+    MRSequentialScan_txt().run()
     
-    with mr_job.make_runner() as runner:
-        runner.run()
-    
+    #Measure End time
     end_time = time.time()
     total_time = end_time - start_time
-    print(f"Sequential scanning time : {total_time} seconds")
+
+    #Save the performance metrics results
+    save_result(total_time, input_filename)
+    
