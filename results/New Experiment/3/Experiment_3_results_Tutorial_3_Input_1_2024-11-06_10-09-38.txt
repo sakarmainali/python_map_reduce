@@ -1,0 +1,7 @@
+Execution time: 15.0142 seconds
+Memory usage before job: 12778.16 MB
+Memory usage after job: 12765.91 MB
+CPU usage before job: 1.0%
+CPU usage after job: 0.9%
+Average CPU Utilization: 0.95%
+Data Shuffling Overhead: 53.07 KB

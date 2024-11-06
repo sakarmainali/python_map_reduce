@@ -7,9 +7,6 @@ Output : Measurement of custom partitioner time and memory usage
 
 '''
 
-
-
-
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 import csv
@@ -17,6 +14,9 @@ import os
 import time
 import timeit  
 import psutil  
+import datetime
+import os
+import sys
 
 cols = 'Name,JobTitle,AgencyID,Agency,HireDate,AnnualSalary,GrossPay'.split(',')
 
@@ -25,13 +25,16 @@ class salarymax(MRJob):
     def mapper(self, _, line):
         # Convert each line into a dictionary
         row = dict(zip(cols, [ a.strip() for a in next(csv.reader([line]))]))
-
-        # Yield the salary
-        yield 'salary', (float(row['AnnualSalary'][1:]), line)
+        
+        try:
+            # Yield the salary
+            yield 'salary', (float(row['AnnualSalary'][1:].replace(',', '')), line)
+        except ValueError:
+            self.increment_counter('warn', 'missing salary', 1)
         
         # Yield the gross pay
         try:
-            yield 'gross', (float(row['GrossPay'][1:]), line)
+            yield 'gross', (float(row['GrossPay'][1:].replace(',', '')), line)
         except ValueError:
             self.increment_counter('warn', 'missing gross', 1)
 
@@ -72,7 +75,7 @@ class CombinerAndCachingEfficiency(MRJob):
         row = dict(zip(cols, [a.strip() for a in next(csv.reader([line]))]))
 
         try:
-            salary = float(row['AnnualSalary'][1:])
+            salary = float(row['AnnualSalary'][1:].replace(',', ''))
         except ValueError:
             self.increment_counter('warn', 'missing salary', 1)
             return
@@ -125,12 +128,28 @@ class CombinerAndCachingEfficiency(MRJob):
                    reducer=self.reducer)
         ]
 
-
+# Function to monitor system resources
 def monitor_resources():
     memory_info = psutil.virtual_memory()
     memory_usage = memory_info.used / (1024 ** 2)  # Convert to MB
     cpu_usage = psutil.cpu_percent(interval=1)  # CPU usage in percentage
     return memory_usage, cpu_usage
+
+#function to save result
+def save_result(execution_time, memory_usage_before, memory_usage_after, cpu_usage_before, cpu_usage_after, cpu_usage, data_shuffled_kb, input_filename):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    input_name = os.path.splitext(os.path.basename(input_filename))[0]
+    filename = os.path.join("results", "New Experiment", "3", f"Experiment_3_results_{input_name}_{timestamp}.txt")
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+
+    with open(filename, "w") as f:
+        f.write("Execution time: {:.4f} seconds\n".format(execution_time))
+        f.write("Memory usage before job: {:.2f} MB\n".format(memory_usage_before))
+        f.write("Memory usage after job: {:.2f} MB\n".format(memory_usage_after))
+        f.write("CPU usage before job: {}%\n".format(cpu_usage_before))
+        f.write("CPU usage after job: {}%\n".format(cpu_usage_after))
+        f.write("Average CPU Utilization: {}%\n".format(cpu_usage))
+        f.write("Data Shuffling Overhead: {:.2f} KB\n".format(data_shuffled_kb))
 
 
 if __name__ == '__main__':
@@ -138,22 +157,18 @@ if __name__ == '__main__':
      # Measure the execution time
     start_time = time.time()  # Record start time
     
-    mr_job = CombinerAndCachingEfficiency(args=['salaries.csv'])  # Create an instance of the MapReduce job with modified implementation
-    #mr_job = salarymax(args=['salaries.csv'])  # Create an instance of the MapReduce job with original implementation
-
     # Run the job and monitor the resources
     memory_usage_before, cpu_usage_before = monitor_resources()
 
     # Measure network I/O before shuffle starts
     net_io_before = psutil.net_io_counters()
     
+    # Get the input filename from command-line arguments for logs
+    input_filename = sys.argv[-1]
+
     # Run the job
-    with mr_job.make_runner() as runner:
-        runner.run()
-        
-        # Collect and print the output inside the runner block
-        for key, value in mr_job.parse_output(runner.cat_output()):
-            print(f'{key}: {value}')
+    #CombinerAndCachingEfficiency().run()  # Create an instance of the MapReduce job with modified implementation
+    salarymax().run()  # Create an instance of the MapReduce job with original implementation
         
     end_time = time.time()
     execution_time = end_time - start_time
@@ -167,13 +182,7 @@ if __name__ == '__main__':
     cpu_usage = (cpu_usage_before + cpu_usage_after) / 2
     
     data_shuffled = (net_io_after.bytes_sent - net_io_before.bytes_sent) + (net_io_after.bytes_recv - net_io_before.bytes_recv)
-    data_shuffled_mb = data_shuffled / (1024 * 1024)
-    # Print the performance metrics
-    print(f"Execution time: {execution_time:.4f} seconds")
-    print(f"Memory usage before job: {memory_usage_before:.2f} MB")
-    print(f"Memory usage after job: {memory_usage_after:.2f} MB")
-    print(f"CPU usage before job: {cpu_usage_before}%")
-    print(f"CPU usage after job: {cpu_usage_after}%")
-    print(f"CPU Utilization: {cpu_usage}%")
-    print(f"Data Shuffling Overhead: {data_shuffled_mb} MB")
+    data_shuffled_kb = data_shuffled / (1024)
 
+    # Save the performance metrics results
+    save_result(execution_time, memory_usage_before, memory_usage_after, cpu_usage_before, cpu_usage_after, cpu_usage, data_shuffled_kb, input_filename)

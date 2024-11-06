@@ -27,7 +27,7 @@ def monitor_resources():
     return memory_usage, cpu_usage
 
 #function to save result
-def save_result(execution_time, memory_usage_before, memory_usage_after, cpu_usage_before, cpu_usage_after, cpu_usage, data_shuffled_kb,input_filename):
+def save_result(execution_time, memory_usage_before, memory_usage_after, cpu_usage_before, cpu_usage_after, cpu_usage, data_shuffled_kb, input_filename):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     input_name = os.path.splitext(os.path.basename(input_filename))[0]
     filename = os.path.join("results", "New Experiment", "1", f"Experiment_1_results_{input_name}_{timestamp}.txt")
