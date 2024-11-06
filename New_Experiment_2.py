@@ -130,7 +130,7 @@ def monitor_resources():
 def save_result(execution_time, memory_usage_before, memory_usage_after, cpu_usage_before, cpu_usage_after, cpu_usage, data_shuffled_kb, input_filename):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     input_name = os.path.splitext(os.path.basename(input_filename))[0]
-    filename = os.path.join("results", "New Experiment", "2", f"Experiment_2_results_{input_name}_{timestamp}.txt")
+    filename = os.path.join("results", "New Experiment", "2", f"New_Experiment_2_Results_{input_name}_{timestamp}.txt")
     os.makedirs(os.path.dirname(filename), exist_ok=True)
 
     with open(filename, "w") as f:

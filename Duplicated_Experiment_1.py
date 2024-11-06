@@ -28,7 +28,7 @@ class MRWordCount(MRJob):
 def save_result(startup_overhead, input_filename):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     input_name = os.path.splitext(os.path.basename(input_filename))[0]
-    filename = os.path.join("results", "Duplicated Experiment", "1", f"Experiment_1_results_{input_name}_{timestamp}.txt")
+    filename = os.path.join("results", "Duplicated Experiment", "1", f"Duplicated_Experiment_1_Results_{input_name}_{timestamp}.txt")
     os.makedirs(os.path.dirname(filename), exist_ok=True)
 
     with open(filename, "w") as f:
