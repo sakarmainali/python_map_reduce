@@ -167,8 +167,8 @@ if __name__ == '__main__':
     input_filename = sys.argv[-1]
 
     # Run the job
-    #CombinerAndCachingEfficiency().run()  # Create an instance of the MapReduce job with modified implementation
-    salarymax().run()  # Create an instance of the MapReduce job with original implementation
+    CombinerAndCachingEfficiency().run()  # Create an instance of the MapReduce job with modified implementation
+    #salarymax().run()  # Create an instance of the MapReduce job with original implementation
         
     end_time = time.time()
     execution_time = end_time - start_time

@@ -48,7 +48,7 @@ def save_result(total_time,total_memory,data_shuffled_kb, input_filename):
     with open(filename, "w") as f:
         f.write("Total job execution time: {:.4f} seconds\n".format(total_time))
         f.write("Memory usage: {:.4f} seconds\n".format(total_memory))
-        f.write("Data Shuffling Overhead: {:.4f} seconds\n".format(data_shuffled_kb))
+        f.write("Data Shuffling Overhead: {:.4f} KB\n".format(data_shuffled_kb))
 
 if __name__ == '__main__':
 
@@ -64,8 +64,8 @@ if __name__ == '__main__':
     net_io_before = psutil.net_io_counters()
 
     #Run the mrjob with combiner
-    MRWordCountWithCombiner().run()
-    #MRWordCountWithoutCombiner().run()  #Original implementation
+    #MRWordCountWithCombiner().run()
+    MRWordCountWithoutCombiner().run()  #Original implementation
 
     
     end_memory = measure_memory()
