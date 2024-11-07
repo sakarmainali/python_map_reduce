@@ -1,10 +1,11 @@
 
 '''
 Duplicated Experiment 1: Startup Overhead: 
-Here we measure how long it takes to start a MapReduce job in mrjob python. 
+Here we measure how long it takes to start a MapReduce job in mrjob python. For this we've also created an empty map reduce job
+to track the startup time.
 
 Input: Varied input text files
-Output : Startup overhead measurement of each text files
+Output : Startup overhead measurement for different inputs
 
 '''
 
@@ -24,6 +25,14 @@ class MRWordCount(MRJob):
     def reducer(self, key, values):
         yield key, sum(values)
 
+class MREmptyJob(MRJob):
+    def mapper(self, _, line):
+        pass  # Skip processing
+
+    def reducer(self, key, values):
+        pass  # Skip processing
+
+
 #function to save result
 def save_result(startup_overhead, input_filename):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -32,7 +41,7 @@ def save_result(startup_overhead, input_filename):
     os.makedirs(os.path.dirname(filename), exist_ok=True)
 
     with open(filename, "w") as f:
-        f.write("Startup overhead time: {:.4f} seconds\n".format(startup_overhead))
+        f.write(f"Startup overhead time: {startup_overhead} seconds\n")
        
 
 
@@ -45,7 +54,8 @@ if __name__ == '__main__':
     start_time = time.time()
 
     #Run the job
-    MRWordCount().run()
+    MREmptyJob.run()
+    #MRWordCount().run()  #Run the actual job for test
  
     #Calculate overhead Time
     end_time = time.time()
