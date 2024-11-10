@@ -118,18 +118,16 @@ Necessary Software & Tools :
 
   Modified Tutorial Scripts:
 
-    - Tutorial 1 : Word Count
+    - Modified Tutorial 1 : Basic Word Count with modified Input
     
-        -File name: Tutorial_1_word_count.py 
-    - Tutorial 2 : Frequent Word Count
+        -File name: Modified_Tutorial_1.py 
+    - Modified Tutorial 2 : Frequent Word with custom Partitioner
     
-        -File name: Tutorial_2_frequent_word_count.py 
+        -File name: Modified_Tutorial_2.py 
 
-    - Tutorial 3 : Top Salary
+    - Modified Tutorial 3 : Top Salary with combiner
     
-        -File name: Tutorial_3_top_salary.py 
-
-
+        -File name: Modified_Tutorial_3.py 
 
   ```shell
   # Run by simulating Hadoop locally
