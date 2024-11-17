@@ -64,7 +64,7 @@ class MRMostUsedWordWithCustomPartitioner(MRJob):  # Define a new class that inh
         word_length = len(word)
         num_reducers = self.options.num_reducers  # Retrieve number of reducers which is assigned initially
         
-        # Partitioning based on word length modulo the number of reducers ie. word length modulo number of reducer
+        # Partitioning based on word length modulo the number of reducers ie. word length % number of reducer
         return word_length % num_reducers
 
 
