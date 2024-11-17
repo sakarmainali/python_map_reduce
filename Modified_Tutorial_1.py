@@ -1,7 +1,7 @@
 '''
 Modified Tutorial 1: Basic Word Count with Modified Input
 This is same as tutorial 1 but here the input data is varied  
-Input: A simple text file with random words. 
+Input: A wikipedia dump text file with random words. 
 Output: Total no of characters, words and lines count
 
 '''
