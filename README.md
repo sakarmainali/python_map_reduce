@@ -91,10 +91,10 @@ In the directory where you placed the project repo,
     ```shell
     runners:
       local:
-        python_bin: 'C:/Users//PROJECTS/files/.venv/Scripts/python.exe'  ##[Modify the link to include your python executable file]
+        python_bin: 'C:/Users/PROJECTS/files/.venv/Scripts/python.exe'  ##[Modify the link to include your python executable file]
       hadoop:
         hadoop_streaming_jar: 'C:/hadoop-3.3.1/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar' ##[Modify the link to include the hadoop streaming jar file found in hadoop installation directory]
-        python_bin: 'C:/Users//PROJECTS/files/.venv/Scripts/python.exe' ##[Modify the link to include your python executable file]
+        python_bin: 'C:/Users/PROJECTS/files/.venv/Scripts/python.exe' ##[Modify the link to include your python executable file]
     ```
 
 * Running the Base Tutorials:
