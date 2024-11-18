@@ -18,16 +18,16 @@ Datasets Used:
     - [Original File from github](https://github.com/zdata-inc/HadoopWithPython/blob/master/resources/salaries.csv)
       - Filename: salaries.csv
 
-     - [First modified file (size: 1 MB)]()
+     - [First modified file (size: 1 MB)](https://raw.githubusercontent.com/sakarmainali/python_map_reduce/refs/heads/master/Tutorial_3_Input_1.csv)
         - Filename: Tutorial_3_Input_1.csv
 
-     - [First modified file (size: 8 MB)]()
+     - [First modified file (size: 8 MB)](https://raw.githubusercontent.com/sakarmainali/python_map_reduce/refs/heads/master/Tutorial_3_Input_2.csv)
         - Filename: Tutorial_3_Input_2.csv
 
-     - [First modified file (size: 16 MB)]()
+     - [First modified file (size: 16 MB)](https://raw.githubusercontent.com/sakarmainali/python_map_reduce/refs/heads/master/Tutorial_3_Input_3.csv)
         - Filename: Tutorial_3_Input_3.csv
 
-     - [First modified file (size: 32 MB)]()
+     - [First modified file (size: 32 MB)](https://raw.githubusercontent.com/sakarmainali/python_map_reduce/refs/heads/master/Tutorial_3_Input_4.csv)
         - Filename: Tutorial_3_Input_4.csv      
       
 
@@ -36,16 +36,16 @@ Datasets Used:
     - [Test Chunk of Original Dump File](https://github.com/zdata-inc/HadoopWithPython/blob/master/resources/salaries.csv)
       - Filename: wikipedia-dump_chunk_1_mini.txt
 
-     - [Chunk of Original Dump File (size: 1 MB)]()
+     - [Chunk of Original Dump File (size: 1 MB)](https://raw.githubusercontent.com/sakarmainali/python_map_reduce/refs/heads/master/Tutorial_1_2_Input_1.txt)
         - Filename: Tutorial_1_2_Input_1.txt
 
-     - [Chunk of Original Dump File (size: 8 MB)]()
+     - [Chunk of Original Dump File (size: 8 MB)](https://raw.githubusercontent.com/sakarmainali/python_map_reduce/refs/heads/master/Tutorial_1_2_Input_2.txt)
         - Filename: Tutorial_1_2_Input_2.txt
 
-     - [Chunk of Original Dump File (size: 16 MB)]()
+     - [Chunk of Original Dump File (size: 16 MB)](https://raw.githubusercontent.com/sakarmainali/python_map_reduce/refs/heads/master/Tutorial_1_2_Input_3.txt)
         - Filename: Tutorial_1_2_Input_3.txt
 
-     - [Chunk of Original Dump File (size: 32 MB)]()
+     - [Chunk of Original Dump File (size: 32 MB)](https://raw.githubusercontent.com/sakarmainali/python_map_reduce/refs/heads/master/Tutorial_1_2_Input_4.txt)
         - Filename: Tutorial_1_2_Input_4.txt   
 
 
