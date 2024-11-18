@@ -33,7 +33,7 @@ Datasets Used:
 
 4. [Wikipedia Dump](https://www.kaggle.com/datasets/toastedalmonds/wikipedia-dump-20200820) : Wikipedia text data for large input size test. The whole dataset is spilt into chunks for test runs.
 
-    - [Test Chunk of Original Dump File](https://github.com/zdata-inc/HadoopWithPython/blob/master/resources/salaries.csv)
+    - [Test Chunk of Original Dump File](https://github.com/zdata-inc/HadoopWithPython/blob/master/resources/wikipedia-dump_chunk_1_mini.txt)
       - Filename: wikipedia-dump_chunk_1_mini.txt
 
      - [Chunk of Original Dump File (size: 1 MB)](https://raw.githubusercontent.com/sakarmainali/python_map_reduce/refs/heads/master/Tutorial_1_2_Input_1.txt)
