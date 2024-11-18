@@ -73,7 +73,10 @@ Necessary Software & Tools :
   you can download the zip file and extract in local machine
 
 
-  In the directory where you placed the project repo,
+
+
+
+In the directory where you placed the project repo,
 
 * Install all required python packages:
   ```shell
@@ -82,7 +85,17 @@ Necessary Software & Tools :
 
 * Setup Configuration File
 
-  - 
+  - Create a mrjob configuration file in project repo and name it to .mrjob.conf
+    The content should look like below:
+
+    ```shell
+    runners:
+      local:
+        python_bin: 'C:/Users//PROJECTS/files/.venv/Scripts/python.exe'  ##[Modify the link to include your python executable file]
+      hadoop:
+        hadoop_streaming_jar: 'C:/hadoop-3.3.1/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar' ##[Modify the link to include the hadoop streaming jar file found in hadoop installation directory]
+        python_bin: 'C:/Users//PROJECTS/files/.venv/Scripts/python.exe' ##[Modify the link to include your python executable file]
+    ```
 
 * Running the Base Tutorials:
 
