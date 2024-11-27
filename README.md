@@ -7,6 +7,8 @@ The project includes three stages: baseline implementations ( Tutorials : Word C
 
 Results from this work demonstrate how data size, complexity, and processing strategies affect the performance of MapReduce tasks, offering insights into optimizing distributed processing workflows.
 
+Code Implementation : [GitHub](https://github.com/sakarmainali/python_map_reduce)
+
 Datasets Used:
 
 1. [Demo input](https://github.com/zdata-inc/HadoopWithPython/blob/master/resources/input.txt) : A random text input file
