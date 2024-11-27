@@ -4,7 +4,7 @@ Duplicated Experiment 1: Startup Overhead:
 Here we measure how long it takes to start a MapReduce job in mrjob python. For this we've also created an empty map reduce job
 to track the startup time.
 
-Input: Varied input text files
+Input: Varied input text files( Eg. project_gutenberg_eBook_emma.txt, Tutorial_1_2_Input_1.txt, wikipedia-dump_chunk_1_mini.txt)
 Output : Startup overhead measurement for different inputs
 
 '''
@@ -53,7 +53,7 @@ if __name__ == '__main__':
     # Measure startup overhead
     start_time = time.time()
 
-    #Run the job
+    #Run the as empty instance
     MREmptyJob.run()
     #MRWordCount().run()  #Run the actual job for test
  
